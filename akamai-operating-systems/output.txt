@@ -1,0 +1,96 @@
+ubuntu@ubuntu-virtual-machine:~$ sudo adduser manager
+[sudo] password for ubuntu: 
+Adding user `manager' ...
+Adding new group `manager' (1001) ...
+Adding new user `manager' (1001) with group `manager' ...
+Creating home directory `/home/manager' ...
+Copying files from `/etc/skel' ...
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for manager
+Enter the new value, or press ENTER for the default
+	Full Name []: 
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] y
+ubuntu@ubuntu-virtual-machine:~$ sudo adduser salesperson
+Adding user `salesperson' ...
+Adding new group `salesperson' (1002) ...
+Adding new user `salesperson' (1002) with group `salesperson' ...
+Creating home directory `/home/salesperson' ...
+Copying files from `/etc/skel' ...
+New password: 
+BAD PASSWORD: The password contains the user name in some form
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for salesperson
+Enter the new value, or press ENTER for the default
+	Full Name []: 
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] y
+ubuntu@ubuntu-virtual-machine:~$ sudo adduser clientSupportIntern
+adduser: Please enter a username matching the regular expression configured
+via the NAME_REGEX[_SYSTEM] configuration variable.  Use the `--force-badname'
+option to relax this check or reconfigure NAME_REGEX.
+ubuntu@ubuntu-virtual-machine:~$ sudo adduser clientSupportIntern --force-badname
+Allowing the use of a questionable username.
+Adding user `clientSupportIntern' ...
+Adding new group `clientSupportIntern' (1003) ...
+Adding new user `clientSupportIntern' (1003) with group `clientSupportIntern' ...
+Creating home directory `/home/clientSupportIntern' ...
+Copying files from `/etc/skel' ...
+New password: 
+BAD PASSWORD: The password contains the user name in some form
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for clientSupportIntern
+Enter the new value, or press ENTER for the default
+	Full Name []: 
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] y
+ubuntu@ubuntu-virtual-machine:~$ sudo adduser techTeamIntern --force-badname
+Allowing the use of a questionable username.
+Adding user `techTeamIntern' ...
+Adding new group `techTeamIntern' (1004) ...
+Adding new user `techTeamIntern' (1004) with group `techTeamIntern' ...
+Creating home directory `/home/techTeamIntern' ...
+Copying files from `/etc/skel' ...
+New password: 
+BAD PASSWORD: The password contains the user name in some form
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for techTeamIntern
+Enter the new value, or press ENTER for the default
+	Full Name []: 
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] y
+ubuntu@ubuntu-virtual-machine:~$ sudo chage -E "1 year" salesperson
+ubuntu@ubuntu-virtual-machine:~$ sudo chage -E "6 months" clientSupportIntern
+ubuntu@ubuntu-virtual-machine:~$ sudo chage -E "6 months" techTeamIntern
+ubuntu@ubuntu-virtual-machine:~$ sudo addgroup sharedGroup
+addgroup: Please enter a username matching the regular expression configured
+via the NAME_REGEX[_SYSTEM] configuration variable.  Use the `--force-badname'
+option to relax this check or reconfigure NAME_REGEX.
+ubuntu@ubuntu-virtual-machine:~$ sudo addgroup sharegroup
+Adding group `sharegroup' (GID 1005) ...
+Done.
+ubuntu@ubuntu-virtual-machine:~$ sudo usermod -aG sharegroup manager
+ubuntu@ubuntu-virtual-machine:~$ sudo usermod -aG sharegroup salesperson
+ubuntu@ubuntu-virtual-machine:~$ sudo mkdir /srv/sharedirectory
+ubuntu@ubuntu-virtual-machine:~$ sudo chown :sharegroup srv/sharedirectory
+chown: cannot access 'srv/sharedirectory': No such file or directory
+ubuntu@ubuntu-virtual-machine:~$ sudo chown :sharegroup /srv/sharedirectory
+ubuntu@ubuntu-virtual-machine:~$ sudo chmod 770 /srv/sharedirectory
