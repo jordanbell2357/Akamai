@@ -15,8 +15,8 @@ Group and Directory Creation:
 1. Execute `sudo addgroup sharegroup` to create a new group for sharing files.
 2. Execute `sudo usermod -aG sharegroup manager` and `sudo usermod -aG sharegroup salesperson` to add the manager and salesperson to the group.
 3. Execute `sudo mkdir /srv/sharedirectory` to create the shared directory.
-4. Execute `sudo chown :sharegroup srv/sharedirectory` to change the group ownership of the directory.
-5. Execute `sudo chmod 770 srv/sharedirectory` to set appropriate permissions.
+4. Execute `sudo chown :sharegroup /srv/sharedirectory` to change the group ownership of the directory.
+5. Execute `sudo chmod 770 /srv/sharedirectory` to set appropriate permissions.
 
 Encryption of Shared Directory:
 1. Install encryption tools via `sudo apt install ecryptfs-utils cryptsetup`.
