@@ -18,19 +18,52 @@ Group and Directory Creation:
 4. Execute `sudo chown :sharegroup /srv/sharedirectory` to change the group ownership of the directory.
 5. Execute `sudo chmod 770 /srv/sharedirectory` to set appropriate permissions.
 
-Encryption of Shared Directory:
-1. Install encryption tools via `sudo apt install ecryptfs-utils cryptsetup`.
-2. Follow the steps to encrypt the sharedDirectory.
 
-File Structure and Sample Files:
-1. Execute `sudo touch /home/dummyuser/sharedDirectory/sample1.txt` and `sudo touch /home/dummyuser/sharedDirectory/sample2.txt` to add two sample files.
+`gpg --full-gen-key`
 
-Permissions:
-1. Add the manager to the sudoers file: `sudo usermod -aG sudo manager`.
+`sudo mkdir -p /var/backups/SecureHub`
 
-Install Software:
-1. Execute `sudo apt update` and then `sudo apt install [software-package-names]` to install desired software.
+```bash
+sudo chown manager:manager /var/backups/SecureHub
+sudo chmod 700 /var/backups/SecureHub
+```
 
-Backup:
-1. Create a text file (e.g., backup_commands.txt) with the commands needed for backup.
-2. Use cron for automated backups. Execute `sudo crontab -e` and add a line like `0 2 * * * tar -czf /path/to/backup/location/backup-$(date +\%Y\%m\%d).tar.gz /path/to/data` to perform a compressed backup every day at 2 AM.
+`backup_commands.sh`
+
+```bash
+#!/bin/bash
+
+# Current date variable
+DATE=$(date +%Y%m%d)
+
+# Directories to be backed up
+USER_DIR1="/home/manager"
+USER_DIR2="/home/salesperson"
+USER_DIR3="/home/clientSupportIntern"
+USER_DIR4="/home/techTeamIntern"
+SHARED_DIR="/srv/sharedirectory"
+
+# Backup destination (conventionally under /var/backups)
+BACKUP_DIR="/var/backups/SecureHub"
+
+# Ensure the backup directory exists
+mkdir -p $BACKUP_DIR
+
+# GPG recipient email (for encrypting backups)
+GPG_RECIPIENT="SecureHub@Akamai.com"
+
+# Create compressed and encrypted backups
+tar -czf - $USER_DIR1 | gpg -e -r $GPG_RECIPIENT -o $BACKUP_DIR/manager_backup_$DATE.tar.gz.gpg
+tar -czf - $USER_DIR2 | gpg -e -r $GPG_RECIPIENT -o $BACKUP_DIR/salesperson_backup_$DATE.tar.gz.gpg
+tar -czf - $USER_DIR3 | gpg -e -r $GPG_RECIPIENT -o $BACKUP_DIR/clientSupportIntern_backup_$DATE.tar.gz.gpg
+tar -czf - $USER_DIR4 | gpg -e -r $GPG_RECIPIENT -o $BACKUP_DIR/techTeamIntern_backup_$DATE.tar.gz.gpg
+tar -czf - $SHARED_DIR | gpg -e -r $GPG_RECIPIENT -o $BACKUP_DIR/sharedDirectory_backup_$DATE.tar.gz.gpg
+```
+
+`sudo crontab -e`
+
+`0 1 * * * /home/ubuntu/backup_commands.sh`
+
+`gpg --armor --output public_key.asc --export 67D513D9394DAF08A6D334F66AFB0136AEBA2C61`
+
+`sudo gpg --import public_key.asc`

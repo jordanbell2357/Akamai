@@ -95,62 +95,236 @@ chown: cannot access 'srv/sharedirectory': No such file or directory
 ubuntu@ubuntu-virtual-machine:~$ sudo chown :sharegroup /srv/sharedirectory
 ubuntu@ubuntu-virtual-machine:~$ sudo chmod 770 /srv/sharedirectory
 
-ubuntu@ubuntu-virtual-machine:~$ sudo apt install ecryptfs-utils cryptsetup
-[sudo] password for ubuntu: 
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-The following additional packages will be installed:
-  cryptsetup-bin cryptsetup-initramfs keyutils libecryptfs1 libtspi1
-The following NEW packages will be installed:
-  cryptsetup cryptsetup-bin cryptsetup-initramfs ecryptfs-utils keyutils
-  libecryptfs1 libtspi1
-0 upgraded, 7 newly installed, 0 to remove and 210 not upgraded.
-Need to get 705 kB of archives.
-After this operation, 2,558 kB of additional disk space will be used.
-Do you want to continue? [Y/n] y
-Get:1 http://ca.archive.ubuntu.com/ubuntu jammy-updates/main amd64 cryptsetup-bin amd64 2:2.4.3-1ubuntu1.1 [145 kB]
-Get:2 http://ca.archive.ubuntu.com/ubuntu jammy-updates/main amd64 cryptsetup amd64 2:2.4.3-1ubuntu1.1 [193 kB]
-Get:3 http://ca.archive.ubuntu.com/ubuntu jammy-updates/main amd64 cryptsetup-initramfs all 2:2.4.3-1ubuntu1.1 [26.1 kB]
-Get:4 http://ca.archive.ubuntu.com/ubuntu jammy/universe amd64 libecryptfs1 amd64 111-5ubuntu1 [36.0 kB]
-Get:5 http://ca.archive.ubuntu.com/ubuntu jammy/universe amd64 libtspi1 amd64 0.3.15-0.2 [160 kB]
-Get:6 http://ca.archive.ubuntu.com/ubuntu jammy/main amd64 keyutils amd64 1.6.1-2ubuntu3 [50.4 kB]
-Get:7 http://ca.archive.ubuntu.com/ubuntu jammy/universe amd64 ecryptfs-utils amd64 111-5ubuntu1 [93.6 kB]
-Fetched 705 kB in 2s (402 kB/s)           
-Preconfiguring packages ...
-Selecting previously unselected package cryptsetup-bin.
-(Reading database ... 177102 files and directories currently installed.)
-Preparing to unpack .../0-cryptsetup-bin_2%3a2.4.3-1ubuntu1.1_amd64.deb ...
-Unpacking cryptsetup-bin (2:2.4.3-1ubuntu1.1) ...
-Selecting previously unselected package cryptsetup.
-Preparing to unpack .../1-cryptsetup_2%3a2.4.3-1ubuntu1.1_amd64.deb ...
-Unpacking cryptsetup (2:2.4.3-1ubuntu1.1) ...
-Selecting previously unselected package cryptsetup-initramfs.
-Preparing to unpack .../2-cryptsetup-initramfs_2%3a2.4.3-1ubuntu1.1_all.deb ...
-Unpacking cryptsetup-initramfs (2:2.4.3-1ubuntu1.1) ...
-Selecting previously unselected package libecryptfs1.
-Preparing to unpack .../3-libecryptfs1_111-5ubuntu1_amd64.deb ...
-Unpacking libecryptfs1 (111-5ubuntu1) ...
-Selecting previously unselected package libtspi1.
-Preparing to unpack .../4-libtspi1_0.3.15-0.2_amd64.deb ...
-Unpacking libtspi1 (0.3.15-0.2) ...
-Selecting previously unselected package keyutils.
-Preparing to unpack .../5-keyutils_1.6.1-2ubuntu3_amd64.deb ...
-Unpacking keyutils (1.6.1-2ubuntu3) ...
-Selecting previously unselected package ecryptfs-utils.
-Preparing to unpack .../6-ecryptfs-utils_111-5ubuntu1_amd64.deb ...
-Unpacking ecryptfs-utils (111-5ubuntu1) ...
-Setting up cryptsetup-bin (2:2.4.3-1ubuntu1.1) ...
-Setting up libtspi1 (0.3.15-0.2) ...
-Setting up libecryptfs1 (111-5ubuntu1) ...
-Setting up cryptsetup (2:2.4.3-1ubuntu1.1) ...
-Setting up keyutils (1.6.1-2ubuntu3) ...
-Setting up cryptsetup-initramfs (2:2.4.3-1ubuntu1.1) ...
-update-initramfs: deferring update (trigger activated)
-Setting up ecryptfs-utils (111-5ubuntu1) ...
-Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
-Processing triggers for man-db (2.10.2-1) ...
-Processing triggers for initramfs-tools (0.140ubuntu13.1) ...
-update-initramfs: Generating /boot/initrd.img-6.2.0-26-generic
+ubuntu@ubuntu-virtual-machine:~$ gpg --full-gen-key
+gpg (GnuPG) 2.2.27; Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+gpg: directory '/home/ubuntu/.gnupg' created
+gpg: keybox '/home/ubuntu/.gnupg/pubring.kbx' created
+Please select what kind of key you want:
+   (1) RSA and RSA (default)
+   (2) DSA and Elgamal
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+  (14) Existing key from card
+Your selection? 1
+RSA keys may be between 1024 and 4096 bits long.
+What keysize do you want? (3072) 
+Requested keysize is 3072 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+Key is valid for? (0) 0
+Key does not expire at all
+Is this correct? (y/N) y
+
+GnuPG needs to construct a user ID to identify your key.
+
+Real name: SecureHub
+Email address: SecureHub@Akamai.com
+Comment: 
+You selected this USER-ID:
+    "SecureHub <SecureHub@Akamai.com>"
+
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? o
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+gpg: agent_genkey failed: Timeout
+Key generation failed: Timeout
+ubuntu@ubuntu-virtual-machine:~$ gpg --full-gen-key
+gpg (GnuPG) 2.2.27; Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Please select what kind of key you want:
+   (1) RSA and RSA (default)
+   (2) DSA and Elgamal
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+  (14) Existing key from card
+Your selection? 1
+RSA keys may be between 1024 and 4096 bits long.
+What keysize do you want? (3072) 
+Requested keysize is 3072 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+Key is valid for? (0) 
+Key does not expire at all
+Is this correct? (y/N) y
+
+GnuPG needs to construct a user ID to identify your key.
+
+Real name: SecureHub
+Email address: SecureHub@Akamai.com
+Comment: 
+You selected this USER-ID:
+    "SecureHub <SecureHub@Akamai.com>"
+
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? o
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+gpg: /home/ubuntu/.gnupg/trustdb.gpg: trustdb created
+gpg: key 6AFB0136AEBA2C61 marked as ultimately trusted
+gpg: directory '/home/ubuntu/.gnupg/openpgp-revocs.d' created
+dgpg: revocation certificate stored as '/home/ubuntu/.gnupg/openpgp-revocs.d/67D513D9394DAF08A6D334F66AFB0136AEBA2C61.rev'
+public and secret key created and signed.
+
+pub   rsa3072 2023-09-08 [SC]
+      67D513D9394DAF08A6D334F66AFB0136AEBA2C61
+uid                      SecureHub <SecureHub@Akamai.com>
+sub   rsa3072 2023-09-08 [E]
+
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+# 
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+# 
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+# 
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+# 
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+# 
+# For more information see the manual pages of crontab(5) and cron(8)
+# 
+# m h  dom mon dow   command
+0 1 * * * /path/to/backup_commands.sh
+
+ubuntu@ubuntu-virtual-machine:~$ gpg --list-keys --keyid-format SHORT
+gpg: checking the trustdb
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+/home/ubuntu/.gnupg/pubring.kbx
+-------------------------------
+pub   rsa3072/AEBA2C61 2023-09-08 [SC]
+      67D513D9394DAF08A6D334F66AFB0136AEBA2C61
+uid         [ultimate] SecureHub <SecureHub@Akamai.com>
+sub   rsa3072/53C50244 2023-09-08 [E]
+
+ubuntu@ubuntu-virtual-machine:~$ vi backup_commands.sh 
+ubuntu@ubuntu-virtual-machine:~$ sudo bash backup_commands.sh 
+tar: Removing leading `/' from member names
+gpg: 67D513D9394DAF08A6D334F66AFB0136AEBA2C61: skipped: No public key
+gpg: [stdin]: encryption failed: No public key
+tar: Child returned status 141
+tar: Error is not recoverable: exiting now
+tar: Removing leading `/' from member names
+gpg: 67D513D9394DAF08A6D334F66AFB0136AEBA2C61: skipped: No public key
+gpg: [stdin]: encryption failed: No public key
+tar: Child returned status 141
+tar: Error is not recoverable: exiting now
+tar: Removing leading `/' from member namesgpg: 67D513D9394DAF08A6D334F66AFB0136AEBA2C61: skipped: No public key
+gpg: [stdin]: encryption failed: No public key
+
+tar: Child returned status 141
+tar: Error is not recoverable: exiting now
+tar: Removing leading `/' from member names
+gpg: 67D513D9394DAF08A6D334F66AFB0136AEBA2C61: skipped: No public key
+gpg: [stdin]: encryption failed: No public key
+tar: Child returned status 141
+tar: Error is not recoverable: exiting now
+gpg: 67D513D9394DAF08A6D334F66AFB0136AEBA2C61: skipped: No public key
+gpg: [stdin]: encryption failed: No public key
+tar: Removing leading `/' from member names
+tar: /srv/sharedDirectory: Cannot stat: No such file or directory
+tar: Child returned status 141
+tar: Error is not recoverable: exiting now
+ubuntu@ubuntu-virtual-machine:~$ gpg --armor --output public_key.asc --export 67D513D9394DAF08A6D334F66AFB0136AEBA2C61
+ubuntu@ubuntu-virtual-machine:~$ sudo gpg --import public_key.asc
+gpg: /root/.gnupg/trustdb.gpg: trustdb created
+gpg: key 6AFB0136AEBA2C61: public key "SecureHub <SecureHub@Akamai.com>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+ubuntu@ubuntu-virtual-machine:~$ sudo gpg --edit-key 67D513D9394DAF08A6D334F66AFB0136AEBA2C61
+gpg (GnuPG) 2.2.27; Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+
+pub  rsa3072/6AFB0136AEBA2C61
+     created: 2023-09-08  expires: never       usage: SC  
+     trust: unknown       validity: unknown
+sub  rsa3072/537D2F4753C50244
+     created: 2023-09-08  expires: never       usage: E   
+[ unknown] (1). SecureHub <SecureHub@Akamai.com>
+
+gpg> trust
+pub  rsa3072/6AFB0136AEBA2C61
+     created: 2023-09-08  expires: never       usage: SC  
+     trust: unknown       validity: unknown
+sub  rsa3072/537D2F4753C50244
+     created: 2023-09-08  expires: never       usage: E   
+[ unknown] (1). SecureHub <SecureHub@Akamai.com>
+
+Please decide how far you trust this user to correctly verify other users' keys
+(by looking at passports, checking fingerprints from different sources, etc.)
+
+  1 = I don't know or won't say
+  2 = I do NOT trust
+  3 = I trust marginally
+  4 = I trust fully
+  5 = I trust ultimately
+  m = back to the main menu
+
+Your decision? 5
+Do you really want to set this key to ultimate trust? (y/N) y
+
+pub  rsa3072/6AFB0136AEBA2C61
+     created: 2023-09-08  expires: never       usage: SC  
+     trust: ultimate      validity: unknown
+sub  rsa3072/537D2F4753C50244
+     created: 2023-09-08  expires: never       usage: E   
+[ unknown] (1). SecureHub <SecureHub@Akamai.com>
+Please note that the shown key validity is not necessarily correct
+unless you restart the program.
+
+gpg> quit
+ubuntu@ubuntu-virtual-machine:~$ sudo bash backup_commands.sh 
+tar: Removing leading `/' from member names
+gpg: checking the trustdb
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+tar: Removing leading `/' from member names
+tar: Removing leading `/' from member names
+tar: Removing leading `/' from member names
+tar: Removing leading `/' from member names
+tar: /srv/sharedDirectory: Cannot stat: No such file or directory
+tar: Exiting with failure status due to previous errors
+ubuntu@ubuntu-virtual-machine:~$ vi backup_commands.sh 
+ubuntu@ubuntu-virtual-machine:~$ sudo bash backup_commands.sh 
+File '/var/backups/SecureHub/manager_backup_20230908.tar.gz.gpg' exists. Overwrite? (y/N) tar: Removing leading `/' from member names
+y
+File '/var/backups/SecureHub/salesperson_backup_20230908.tar.gz.gpg' exists. Overwrite? (y/N) tar: Removing leading `/' from member names
+y
+tar: Removing leading `/' from member names
+File '/var/backups/SecureHub/clientSupportIntern_backup_20230908.tar.gz.gpg' exists. Overwrite? (y/N) y
+File '/var/backups/SecureHub/techTeamIntern_backup_20230908.tar.gz.gpg' exists. tar: Removing leading `/' from member names
+Overwrite? (y/N) y
+tar: Removing leading `/' from member names
+File '/var/backups/SecureHub/sharedDirectory_backup_20230908.tar.gz.gpg' exists. Overwrite? (y/N) y
 ubuntu@ubuntu-virtual-machine:~$ 
+
 
